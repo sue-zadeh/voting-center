@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Competitions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #2b2b2b;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #d8e0eb;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .competition-item {
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .competition-image {
+            width: 150px;
+            height: 150px;
+            margin-right: 20px;
+            border-radius: 5px;
+            background-color: white; /* Default background if no image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: #007bff; /* Text color if no image */
+        }
+        .competition-details {
+            flex: 1;
+        }
+        .competition-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn {
+            display: inline-block;
+            width: 120px; /* Set a fixed width */
+            padding: 10px 0; /* Adjust padding for uniform height */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+        }
+        .btn-success {
+            background-color: #28a745;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-info {
+            background-color: #17a2b8;
+        }
+        .btn-back {
+            background-color: #6c757d;
+            margin-bottom: 20px;
+        }
+        .btn-back:hover {
+            background-color: #5a6268;
+        }
+    </style>
+    <script>
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this competition? This action cannot be undone.');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Back Button -->
+        <a href="{{ url_for('admin_home') }}" class="btn btn-back">Back</a>
+
+        <h1>Future Competitions</h1>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="competition-list">
+            {% if competitions %}
+                {% for competition in competitions %}
+                    <div class="competition-item">
+                        <div class="competition-image">
+                            {% if competition.image %}
+                                <img src="{{ url_for('static', filename='assets/' ~ competition.image) }}" alt="{{ competition.name }}" style="width:100%; height:100%; object-fit:cover;">
+                            {% else %}
+                                No Image
+                            {% endif %}
+                        </div>
+                        <div class="competition-details">
+                            <h2>{{ competition.name }}</h2>
+                            <p>{{ competition.description }}</p>
+                            <p>Start Date: {{ competition.start_date }}</p>
+                            <p>End Date: {{ competition.end_date }}</p>
+                            <p>Status: {{ competition.status }}</p>
+                        </div>
+                        <div class="competition-actions">
+                            <a href="{{ url_for('view_competitors', competition_id=competition.competition_id) }}" class="btn btn-info">View Competitors</a>
+                            <a href="{{ url_for('edit_competition', competition_id=competition.competition_id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ url_for('add_competitor', competition_id=competition.competition_id) }}" class="btn btn-success">Add Competitor</a>
+                            <form action="{{ url_for('delete_competition', competition_id=competition.competition_id) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No future competitions available.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #2b2b2b;
+            color: white;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #333;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .competition-image {
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            display: block;
+            border-radius: 5px;
+            object-fit: cover;
+            background-color: #fff;
+        }
+        .competition-details {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .competition-details p {
+            margin-bottom: 10px;
+        }
+        .competitors {
+            margin-top: 40px;
+        }
+        .competitor-item {
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .competitor-details {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .competitor-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn-back:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Competition Details</h1>
+        {% if competition.image %}
+            <img src="{{ url_for('static', filename='assets/' + competition.image) }}" alt="{{ competition.name }}" class="competition-image">
+        {% endif %}
+        <div class="competition-details">
+            <h2>{{ competition.name }}</h2>
+            <p>{{ competition.description }}</p>
+            <p>Start Date: {{ competition.start_date.strftime('%Y-%m-%d') }}</p>
+            <p>End Date: {{ competition.end_date.strftime('%Y-%m-%d') }}</p>
+            <p>Status: {{ competition.status }}</p>
+        </div>
+
+        <div class="competitors">
+            <h2>Competitors</h2>
+            {% if competitors %}
+                {% for competitor in competitors %}
+                    <div class="competitor-item">
+                        {% if competitor.image %}
+                            <img src="{{ url_for('static', filename='assets/' + competitor.image) }}" alt="{{ competitor.name }}" class="competitor-image">
+                        {% else %}
+                            <div class="competitor-image" style="background-color: #fff; color: #007bff; display: flex; justify-content: center; align-items: center;">
+                                No Image
+                            </div>
+                        {% endif %}
+                        <div class="competitor-details">
+                            <h3>{{ competitor.name }}</h3>
+                            <p>{{ competitor.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No competitors added yet.</p>
+            {% endif %}
+        </div>
+
+        <a href="{{ url_for('view_open_competitions') }}" class="btn btn-back">Back to Open Competitions</a>
+    </div>
+</body>
+</html>

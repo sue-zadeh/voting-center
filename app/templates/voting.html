@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}Voting Center{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Commented out the message code -->
+     
+    <!--{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}-->
+    
+
+    <!-- Header with Increased Font Size and Background Color -->
+    <h1 class="text-center text-danger bg-dark mb-4 p-3" data-aos="fade-down-right">Voting Center</h1>
+    <h3 class="text-center text-light lead bg-dark  p-3 fs-3" data-aos="fade-down-right">
+        Your vote helps recognize the most breathtaking and cherished walkways across New Zealand.
+    </h4>
+
+    <!-- High User Engagement Button -->
+    <div class="text-center mt-5 " data-aos="fade-down-left">
+        <p data-aos="fade-down-left" class="lead text-light fs-4">If you want to know more about competitors, click the button below to see information about them.</p>
+        <a href="{{ url_for('competitors') }}" class="btn btn-danger btn-lg mt-5">Competitors Information</a>
+    </div>
+
+    <h2 data-aos="fade-down-right" class="mt-5 text-light text-center text-danger fs-2 bg-dark p-2">Select a Competition and Vote</h2>
+
+    <!-- Voting Form with Background Color -->
+    <div class="p-5 rounded bg-dark text-light mt-4 data-aos="fade-down-left"">
+        <form method="POST" action="{{ url_for('voting') }}" class="text-center">
+            <div class="mb-4">
+                <label for="competition" class="form-label text-light fs-4">Competition</label>
+                <select class="form-select text-dark fs-4" id="competition" name="competition" required>
+                    {% for competition in competitions %}
+                        <option value="{{ competition['CompetitionID'] }}">{{ competition['Name'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="competitor" class="form-label text-light fs-4">Competitor</label>
+                <select class="form-select text-dark fs-4" id="competitor" name="competitor" required>
+                  <option value="1">Milford Track</option>
+                  <option value="2">Routeburn Track</option>
+                  <option value="3">Tongariro Alpine Crossing</option>
+                  <option value="4">Abel Tasman Coast Track</option>
+                  <option value="5">Heaphy Track</option>
+                  <option value="6">Kepler Track</option>
+                  <option value="7">Rakiura Track</option>
+                  <option value="8">Lake Waikaremoana Track</option>
+                  <option value="9">Whanganui Journey</option>
+                  <option value="10">Paparoa Track</option>
+                  <option value="11">Queen Charlotte Track</option>
+                  <option value="12">Pinnacles Track</option>
+                  <!--<option value="13">Pouakai Crossing</option>
+                  <option value="14">Mount Taranaki Summit Track</option>
+                  <option value="15">Hump Ridge Track</option>
+                  <option value="16">Cape Reinga Coastal Walkway</option>
+                  <option value="17">Te Araroa Trail</option>
+                  <option value="18">Mount Cook National Park Walks</option>
+                  <option value="19">Arthur’s Pass Walking Tracks</option>
+                  <option value="20">Rob Roy Glacier Track</option>
+                  <option value="21">Mount Aspiring Hut Walk</option>
+                  <option value="22">Hooker Valley Track</option>
+                  <option value="23">Ben Lomond Track</option>
+                  <option value="24">Mount Kaukau Walk</option>
+                  <option value="25">Waiheke Island Coastal Walk</option>
+                  <option value="26">Catlins Coastal Heritage Trail</option>
+                  <option value="27">Rangitoto Summit Track</option>
+                  <option value="28">Blue Pools Walk</option>
+                  <option value="29">Roy's Peak Track</option>
+                  <option value="30">Cape Brett Track</option>
+                  <option value="31">Crater Rim Walkway</option>
+                  <option value="32">Abel Tasman National Park Day Walks</option>
+                  <option value="33">Lake Matheson Walk</option>
+                  <option value="34">Fiordland National Park Walks</option>
+                  <option value="35">Moeraki Boulders Walk</option>
+                  <option value="36">Otago Central Rail Trail</option>
+                  <option value="37">Waiau Pass Track</option>
+                  <option value="38">Aoraki Mount Cook Village Short Walks</option>
+                  <option value="39">Doubtful Sound Walks</option>
+                  <option value="40">Mount Holdsworth Track</option>
+                  <option value="41">Rangitoto Island Walks</option>
+                  <option value="42">Craters of the Moon Track</option>
+                  <option value="43">Te Whara Track</option>
+                  <option value="44">Kauaeranga Kauri Trail</option>
+                  <option value="45">Goldie Bush Walkway</option>
+                  <option value="46">Gillespie Pass Circuit</option>
+                  <option value="47">Hollyford Track</option>
+                  <option value="48">Queenstown Hill Time Walk</option>
+                  <option value="49">Karangahake Gorge Historic Walkway</option>
+                  <option value="50">Otago Central Rail Trail</option>-->
+              </select>
+          </div>
+            <button type="submit" class="btn btn-danger fs-2 btn-lg w-50">Vote</button>
+        </form>
+    </div>
+</div>
+<!-- Include AOS JS for scroll -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({
+  duration: 1000,
+});
+</script>
+
+{% endblock %}

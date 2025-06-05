@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Competitions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #2b2b2b;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #d8e0eb;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .competition-item {
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .competition-image {
+            width: 150px;
+            height: 150px;
+            margin-right: 20px;
+            border-radius: 5px;
+            background-color: white; /* Default background if no image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: #007bff; /* Text color if no image */
+        }
+        .competition-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .competition-details {
+            flex: 1;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Open Competitions</h1>
+
+        {% if open_competitions %}
+            {% for competition in open_competitions %}
+                <div class="competition-item">
+                    <div class="competition-image">
+                        {% if competition.image %}
+                        <img src="{{ url_for('static', filename='assets/' ~ competition.image) }}" alt="{{ competition.name }}" style="width:100%; height:100%; object-fit:cover;">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </div>
+                    <div class="competition-details">
+                        <h2>{{ competition.name }}</h2>
+                        <p>Start Date: {{ competition.start_date }}</p>
+                        <p>End Date: {{ competition.end_date }}</p>
+                        <p>Status: {{ competition.status }}</p>
+                        <a href="{{ url_for('view_competitors', competition_id=competition.competition_id) }}" class="btn">View Competitors</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No open competitions available.</p>
+        {% endif %}
+
+        <a href="{{ url_for('admin_home') }}" class="btn-back">Back</a>
+    </div>
+</body>
+</html>

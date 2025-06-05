@@ -1,0 +1,106 @@
+/* body, html {
+  /* background-color: rgb(116, 9, 9) !important; */
+  /* padding: 0px !important;
+  margin: 0px !important;
+  overflow-x: hidden;
+} */
+
+
+
+/* home page */
+/* .content-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;  
+  background-size: cover;
+  height: 85vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-bottom: 5px solid darkred;
+  position: relative;
+  animation: fade-in 2s ease-in forwards;
+}
+
+/* .content-overlay {
+  max-width: 50%; 
+  margin-left: 10%; 
+  margin-top: 15%; 
+  background-color: rgba(86, 86, 86, 0.8); 
+  padding: 20px;
+  border-radius: 10px;
+} */
+
+ .button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+} 
+
+.log-home {
+  background-color: #b06674;
+    border: none;
+}
+
+.scroll-down-container {
+  position: absolute;
+  bottom: 25px; 
+  left: 50%; 
+  transform: translateX(-50%);
+  text-align: center;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+/* pic home-second area */
+/* .pic-home2{
+ justify-content: center;
+ width: 85%;
+ height: auto;
+ border: solid 0.5em rgb(250, 231, 231);
+ border-radius: 55% 40% 50% 12%;
+ animation: slideIn 3s ease-out; 
+ object-fit: cover; 
+}
+
+.image-overlay {
+  display: flex; 
+  justify-content: center; 
+  gap: 20px; 
+  flex-wrap: wrap; 
+}
+
+.new-image-container {
+  display: flex;
+  justify-content: flex-end; 
+  margin-top: -60px; 
+} */
+ 
+
+/* login page */
+/* bodylog{
+ background-image: url(./static/Assets/walk2.jpg); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: auto; 
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 3px solid darkred;
+}
+.loginform {
+  justify-content: center;
+  align-items: center;
+
+} */

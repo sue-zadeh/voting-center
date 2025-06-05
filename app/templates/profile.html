@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Profile Header -->
+            <div class="text-center profile-header">
+                <div class="image-card mt-5 mx-auto text-danger" style="width: 200px; height: 200px; border: 2px solid #ddd; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center; background-color: #f8f9fa;">
+                    {% if user['Image'] and user['Image'] != 'default.png' %}
+                        <img src="{{ url_for('static', filename='uploads/' + user['Image']) }}" alt="Profile Picture" class="img-fluid" style="max-width: 100%; max-height: 100%;">
+                    {% else %}
+                        <span class="text-muted">No Picture</span>
+                    {% endif %}
+                </div>
+                <h1 class="my-5 text-danger">{{ user['FirstName'] }} {{ user['LastName'] }}</h1>
+            </div>
+
+            <!-- Profile Information Table -->
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered table-hover bg-light text-dark">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Username:</th>
+                            <td>{{ user['Username'] }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Email:</th>
+                            <td>{{ user['Email'] }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Location:</th>
+                            <td>{{ user['Location'] }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Status:</th>
+                            <td class="status-active">{{ user['Status'] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

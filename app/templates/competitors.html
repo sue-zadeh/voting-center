@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+  .gallery-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.gallery-img:hover {
+  transform: scale(1.05); /* Scale the image by 1.1 on hover */
+  opacity: 0.6;
+}
+
+.modal-img {
+    max-height: 420px;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+</style>
+
+<div class="container mt-5">
+    <h1 class="text-center text-danger">Competitor Gallery</h1>
+    <h4 class="text-center text-light mb-4">Discover the Best Walkways in New Zealand</h4>
+    <h5 class="text-center text-light mb-5 lead">
+        Explore the beauty of New Zealand's most cherished walkways. Click on any image to learn more about the facilities and scenic wonders each walkway offers.
+    </h5>
+
+    <div class="row mt-5">
+     {% for competitor in competitors %}
+      <div class="col-lg-4 col-md-4 col-sm-8 mb-4 gallery-item">
+          <div class="img-container bg-dark p-1">
+              <img src="{{ competitor.image_url }}" alt="{{ competitor.Name }}" class="img-fluid gallery-img text-danger" data-toggle="modal" data-target="#competitorModal{{ competitor.CompetitorID }}">
+          </div>
+          <h5 class="text-center text-light my-3">{{ competitor.Name }}</h5>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade fs-4 text-danger " id="competitorModal{{ competitor.CompetitorID }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content bg-dark text-light bg-dark text-left">
+                  <div class="modal-header">
+                      <h5 class="modal-title fs-5 text-danger pt-4" id="exampleModalLabel">{{ competitor.Name }}</h5>
+                      <button type="button" class="close text-light fs-4" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body text-center">
+                      <p class="text-light text-left fs-5 py-3">{{ competitor.Description }}</p>
+                      <img src="{{ competitor.image_url }}" alt="{{ competitor.Name }}" class="img-fluid mb-3 modal-img">
+                      <img src="{{ competitor.image_detail_1 }}" alt="{{ competitor.Name }}" class="img-fluid mb-3 modal-img">
+                      <img src="{{ competitor.image_detail_2 }}" alt="{{ competitor.Name }}" class="img-fluid modal-img">
+                  </div>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

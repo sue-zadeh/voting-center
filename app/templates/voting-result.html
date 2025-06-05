@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+   <!--{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {% for category, message in messages %}
+                    {{ message }}
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    {% endwith %}-->
+
+    <h1 data-aos="fade-down-left" class="text-center text-danger">Voting Results</h1>
+    <h4 data-aos="fade-down-right"class="text-center text-light mb-5 mt-4">Here are the current voting results.
+       You can see the number of votes each competitor has received, along with 
+       the date and time of each vote.</h4>
+    <div class="table-responsive">
+        <table class="table table-hover table-dark table-striped table-bordered text-light mx-auto" style="max-width: 800px;">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th>#</th>
+                    <th>Competition Name</th>
+                    <th>Competitor Name</th>
+                    <th>Vote Count</th>
+                    <th>Vote Date</th>
+                    <th>Vote Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr class="text-center">
+                        <td>{{ loop.index }}</td>
+                        <td>{{ result['CompetitionName'] }}</td>
+                        <td>{{ result['CompetitorName'] }}</td>
+                        <td>{{ result['vote_count'] }}</td>
+                        <td>{{ result['LastVoteDate'] }}</td>
+                        <td>{{ result['LastVoteTime'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Include AOS JS for scroll -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({
+  duration: 1000,
+});
+</script>
+
+
+{% endblock %}
